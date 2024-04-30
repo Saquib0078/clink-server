@@ -398,8 +398,8 @@ const SendNotification = async (req, res) => {
 
     // phoneNumbers=phoneNumbers["phoneNumbers"]
 
-    const imageUrl = `http://192.168.1.6:3000/user/getUsermedia/${image}`;
-    console.log(phoneNumbers);
+    const imageUrl = `${process.env.BASE_URL}user/getUsermedia/${image}`;
+    console.log(imageUrl);
 
     if (!phoneNumbers || !title || !body) {
       return res.status(400).json({ error: "Invalid request parameters" });

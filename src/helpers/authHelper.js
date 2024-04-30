@@ -24,7 +24,6 @@ const initOTP = async (num) => {
     }
 
     let otp = generateOTP();
-
     const expirationTime = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes from now
 
     const temp = new TemporaryUserModel({
