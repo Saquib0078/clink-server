@@ -399,7 +399,6 @@ const SendNotification = async (req, res) => {
     // phoneNumbers=phoneNumbers["phoneNumbers"]
 
     const imageUrl = `${process.env.BASE_URL}user/getUsermedia/${image}`;
-    console.log(imageUrl);
 
     if (!phoneNumbers || !title || !body) {
       return res.status(400).json({ error: "Invalid request parameters" });
@@ -459,10 +458,12 @@ const SendNotification = async (req, res) => {
 
 const getNotification = async (req, res) => {
   try {
-    const userPhoneNumber = req.user.num; // Replace this with the actual user's phone number
+    const userPhoneNumber = req.user.num.toString(); // Convert to string
     const notifications = await notificationModel
       .find({
-        phoneNumbers: userPhoneNumber,
+        phoneNumbers: {
+          $in: [userPhoneNumber, `"${userPhoneNumber}"`] // Check for both string representations
+        }
       })
       .sort({ createdAt: -1 });
 
@@ -472,6 +473,7 @@ const getNotification = async (req, res) => {
     return res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
 
 const getMergedUsers = async (req, res) => {
   try {

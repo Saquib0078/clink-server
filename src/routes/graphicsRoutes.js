@@ -40,6 +40,7 @@ router.put("/controllers/updateGraphicsMedia/:id",upload.fields([
 
 router.post("/controllers/chipButtonList",CreatechipButtonList)
 
+
 router.post("/controllers/slider",upload.single("slider"),CreateSlider);
 
 router.put("/controllers/slider/:sliderId",upload.single("slider"),UpdateSlider);
